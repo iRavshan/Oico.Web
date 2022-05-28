@@ -8,7 +8,7 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="admin-root">
                 <h3>Yangi mahsulot yaratish</h3>
-                <form asp-action="create" asp-controller="admin" method="post">
+                <form enctype="multipart/form-data" asp-action="create" asp-controller="admin" method="post">
 
                     <label asp-for="Name"></label>
                     <input type="text" asp-for="Name" required>
