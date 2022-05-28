@@ -24,7 +24,7 @@ namespace Oico.Service
             await productRepo.SaveComplete();
         }
 
-        public async Task GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
             return await productRepo.GetAll();
         }
