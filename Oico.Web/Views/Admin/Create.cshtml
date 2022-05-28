@@ -1,0 +1,40 @@
+﻿@model CreateViewModel
+@{
+    ViewData["Title"] = "Yangi mahsulot yaratish";
+}
+
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="admin-root">
+                <h3>Yangi mahsulot yaratish</h3>
+                <form asp-action="create" asp-controller="admin" method="post">
+
+                    <label asp-for="Name"></label>
+                    <input type="text" asp-for="WholesalePrice" required>
+
+                    <label asp-for="WholesalePrice"></label>
+                    <input type="number" asp-for="WholesalePrice" required>
+
+                    <label asp-for="Price"></label>
+                    <input type="number" asp-for="Price" required>
+
+                    <label asp-for="NumberOfBoxes"></label>
+                    <input type="number" asp-for="NumberOfBoxes" required>
+
+                    <label asp-for="NumberOfBox"></label>
+                    <input type="number" asp-for="NumberOfBox" required>
+
+                    <label asp-for="Massa"></label>
+                    <input type="number">
+
+                    <label asp-for="Image"></label>
+                    <input type="file" accept="image/*" asp-for="Image">
+
+                    <button>Yaratish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
