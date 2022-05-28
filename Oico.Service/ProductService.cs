@@ -23,5 +23,15 @@ namespace Oico.Service
             await productRepo.Create(product);
             await productRepo.SaveComplete();
         }
+
+        public async Task GetAll()
+        {
+            return await productRepo.GetAll();
+        }
+
+        public async Task<Product> GetById(Guid Id)
+        {
+            return await productRepo.GetById(Id);
+        }
     }
 }

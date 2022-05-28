@@ -11,7 +11,7 @@
                 <form asp-action="create" asp-controller="admin" method="post">
 
                     <label asp-for="Name"></label>
-                    <input type="text" asp-for="WholesalePrice" required>
+                    <input type="text" asp-for="Name" required>
 
                     <label asp-for="WholesalePrice"></label>
                     <input type="number" asp-for="WholesalePrice" required>
@@ -26,7 +26,7 @@
                     <input type="number" asp-for="NumberOfBox" required>
 
                     <label asp-for="Massa"></label>
-                    <input type="number">
+                    <input type="number" asp-for="Massa">
 
                     <label asp-for="Image"></label>
                     <input type="file" accept="image/*" asp-for="Image">

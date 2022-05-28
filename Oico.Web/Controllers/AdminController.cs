@@ -35,7 +35,7 @@ namespace Oico.Web.Controllers
                 Name = model.Name,
                 NumberOfBox = model.NumberOfBox,
                 NumberOfBoxes = model.NumberOfBoxes,
-                ImageUrl = model.Image.Name,
+                ImageUrl = "rasm",
                 Massa = model.Massa
             };
 

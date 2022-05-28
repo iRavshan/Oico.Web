@@ -10,5 +10,7 @@ namespace Oico.Service.Services
     public interface IProductService
     {
         Task Create(Product product);
+        Task GetAll();
+        Task<Product> GetById(Guid Id);
     }
 }
