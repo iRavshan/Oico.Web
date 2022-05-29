@@ -33,5 +33,12 @@ namespace Oico.Service
         {
             return await productRepo.GetById(Id);
         }
+
+        public async Task<IEnumerable<Product>> LastProducts(int count)
+        {
+            var items = Enumerable.Reverse(await productRepo.GetAll());
+
+            return items.Take(count).Select(w => w);
+        }
     }
 }

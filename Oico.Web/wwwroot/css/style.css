@@ -1927,6 +1927,7 @@ ol {
 					display: inline-block;
 					margin-right: 25px;
 					border-radius: 4px;
+					width: 120px;
 				}
 
 				.shoping__cart__table table tbody tr td.shoping__cart__item h5 {

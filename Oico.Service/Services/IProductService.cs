@@ -11,6 +11,7 @@ namespace Oico.Service.Services
     {
         Task Create(Product product);
         Task<IEnumerable<Product>> GetAll();
+        Task<IEnumerable<Product>> LastProducts(int count);
         Task<Product> GetById(Guid Id);
     }
 }
