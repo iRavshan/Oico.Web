@@ -56,6 +56,7 @@ namespace Oico.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> Products()
         {
             ProductsViewModel model = new ProductsViewModel
@@ -64,6 +65,22 @@ namespace Oico.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Products(ProductsViewModel model)
+        {
+            ProductsViewModel newModel = new ProductsViewModel();
+
+            if (model.TextOfSearch is not null)
+            {
+                newModel.AllProducts = await productService.GetByShortName(model.TextOfSearch);
+            }
+
+            else
+                newModel.AllProducts = await productService.GetAll();
+
+            return View(newModel);
         }
 
         [HttpPost]

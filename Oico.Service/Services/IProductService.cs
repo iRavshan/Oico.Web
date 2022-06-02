@@ -15,5 +15,6 @@ namespace Oico.Service.Services
         Task<Product> GetById(Guid Id);
         Task Delete(Guid Id);
         void Update(Product product);
+        Task<IEnumerable<Product>> GetByShortName(string shortname);
     }
 }

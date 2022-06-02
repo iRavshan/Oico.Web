@@ -40,6 +40,13 @@ namespace Oico.Service
             return await productRepo.GetById(Id);
         }
 
+        public async Task<IEnumerable<Product>> GetByShortName(string shortname)
+        {
+            IEnumerable<Product> products = await productRepo.GetAll();
+            IEnumerable<Product> result = products.Where(w => w.Name.ToLower().Contains(shortname.ToLower())).Select(p => p).ToList();            
+            return result;
+        }
+
         public async Task<IEnumerable<Product>> LastProducts(int count)
         {
             var items = Enumerable.Reverse(await productRepo.GetAll());

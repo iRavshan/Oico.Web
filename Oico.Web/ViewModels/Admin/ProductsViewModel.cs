@@ -9,5 +9,7 @@ namespace Oico.Web.ViewModels.Admin
     public class ProductsViewModel
     {
         public IEnumerable<Product> AllProducts { get; set; }
+
+        public string TextOfSearch { get; set; }
     }
 }
