@@ -1,0 +1,42 @@
+﻿@model DetailsViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="admin-root">
+                <h3>Ma'lumotlarni o'zgartirish</h3>
+                <form enctype="multipart/form-data" asp-action="update" asp-controller="admin" method="post">
+                    <input asp-for="Id" hidden />
+                    <input asp-for="ExistingImageUrl" hidden />
+
+                    <label asp-for="Name"></label>
+                    <input type="text" asp-for="Name" required>
+
+                    <label asp-for="WholesalePrice"></label>
+                    <input type="number" asp-for="WholesalePrice" required>
+
+                    <label asp-for="Price"></label>
+                    <input type="number" asp-for="Price" required>
+
+                    <label asp-for="NumberOfBoxes"></label>
+                    <input type="number" asp-for="NumberOfBoxes" required>
+
+                    <label asp-for="NumberOfBox"></label>
+                    <input type="number" asp-for="NumberOfBox" required>
+
+                    <label asp-for="Massa"></label>
+                    <input type="number" asp-for="Massa">
+
+                    <label asp-for="Image"></label>
+                    <input type="file" accept="image/*" asp-for="Image">
+
+                    <button>Saqlash</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

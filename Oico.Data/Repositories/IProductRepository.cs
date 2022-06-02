@@ -10,7 +10,7 @@ namespace Oico.Data.Repositories
     public interface IProductRepository
     {
         Task Create(Product product);
-        Task Update(Product product);
+        void Update(Product product);
         Task Delete(Guid Id);
         Task<IEnumerable<Product>> GetAll();
         Task<Product> GetById(Guid Id);

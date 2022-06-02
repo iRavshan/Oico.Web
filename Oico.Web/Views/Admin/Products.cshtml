@@ -22,35 +22,41 @@
                                 <th>Qutida</th>
                                 <th>Massasi</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.AllProducts)
                             {
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="/img/product/@item.ImageUrl" alt="@item.Name">
-                                        <h5>@item.Name</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        @item.WholesalePrice
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        @item.Price
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        @item.NumberOfBoxes
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        @item.NumberOfBox
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        @item.Massa
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <a href=""><i class="fas fa-pen"></i></a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="shoping__cart__item">
+                                    <img src="/img/product/@item.ImageUrl" alt="@item.Name">
+                                    <h5>@item.Name</h5>
+                                </td>
+                                <td class="shoping__cart__price">
+                                    @item.WholesalePrice
+                                </td>
+                                <td class="shoping__cart__total">
+                                    @item.Price
+                                </td>
+                                <td class="shoping__cart__total">
+                                    @item.NumberOfBoxes
+                                </td>
+                                <td class="shoping__cart__total">
+                                    @item.NumberOfBox
+                                </td>
+                                <td class="shoping__cart__total">
+                                    @item.Massa
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <a asp-controller="admin" asp-action="details" asp-route-Id="@item.Id"><i class="fas fa-pen"></i></a>
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <form asp-controller="admin" asp-action="delete" asp-route-Id="@item.Id" method="post">
+                                        <button type="submit" onclick="return confirm('Rostan ham ushbu mahsulotni ochirmoqchimisiz ?')" class="delete-btn"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

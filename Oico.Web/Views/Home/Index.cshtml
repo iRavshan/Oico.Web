@@ -10,11 +10,11 @@
             <div class="col-lg-12">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
+                        <form asp-controller="home" asp-action="search" method="post">
                             <div class="hero__search__categories">
                                 <i class="fas fa-search"></i>
                             </div>
-                            <input type="text" placeholder="Barchasi topiladi ...">
+                            <input asp-for="SearchText" type="text" placeholder="Barchasi topiladi ...">
                             <button type="submit" class="site-btn">Qidirish</button>
                         </form>
                     </div>
@@ -28,12 +28,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                <div class="hero__item set-bg" data-setbg="/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>Muzqaymoqlar</span>
                         <h2>Faqat <br />eng yaxshilari</h2>
                         <p>Yangi ta'mlarni kashf etish vaqti yetdi.</p>
-                        <a href="shop-grid.html" class="primary-btn">Buyurtma berish</a>
+                        <a asp-controller="home" asp-action="products" class="primary-btn">Buyurtma berish</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">@item.Name</a></h6>
+                            <h6><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h6>
                             @{
                                 string s = string.Empty;
 

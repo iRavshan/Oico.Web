@@ -9,6 +9,8 @@ namespace Oico.Web.ViewModels.Admin
 {
     public class CreateViewModel
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "Muzqaymoqning nomi")]
         public string Name { get; set; }
 

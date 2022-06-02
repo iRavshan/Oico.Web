@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Oico.Domain;
 using Oico.Service.Services;
@@ -34,16 +35,7 @@ namespace Oico.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = string.Empty;
-
-                if(model.Image != null)
-                {
-                    string uploadFolder = Path.Combine(webHost.WebRootPath, "img/product");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
-                    string imageFilePath = Path.Combine(uploadFolder, uniqueFileName);
-                    model.Image.CopyTo(new FileStream(imageFilePath, FileMode.Create));
-                }
-
+                
                 Product product = new Product
                 {
                     Id = Guid.NewGuid(),
@@ -52,7 +44,7 @@ namespace Oico.Web.Controllers
                     Name = model.Name,
                     NumberOfBox = model.NumberOfBox,
                     NumberOfBoxes = model.NumberOfBoxes,
-                    ImageUrl = uniqueFileName,
+                    ImageUrl = UploadPhoto(model.Image),
                     Massa = model.Massa
                 };
 
@@ -73,5 +65,85 @@ namespace Oico.Web.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            Product product = await productService.GetById(Id);
+
+            string webRootPath = webHost.WebRootPath;
+            
+            var fullPath = webRootPath + "/img/product/" + product.ImageUrl;
+
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+
+            await productService.Delete(Id);
+
+            return RedirectToAction("products");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid Id)
+        {
+            Product product = await productService.GetById(Id);
+
+            DetailsViewModel model = new DetailsViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                WholesalePrice = product.WholesalePrice,
+                NumberOfBox = product.NumberOfBox,
+                NumberOfBoxes = product.NumberOfBoxes,
+                Massa = product.Massa,
+                ExistingImageUrl = product.ImageUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(DetailsViewModel model)
+        {
+            Product product = await productService.GetById(model.Id);
+
+            product.Name = model.Name;
+            product.WholesalePrice = model.WholesalePrice;
+            product.Price = model.Price;
+            product.NumberOfBox = model.NumberOfBox;
+            product.NumberOfBoxes = model.NumberOfBoxes;
+            product.Massa = model.Massa;
+            if(model.Image != null) 
+            {
+                if(model.ExistingImageUrl != null)
+                {
+                    string filePath = Path.Combine(webHost.WebRootPath, "img/product", model.ExistingImageUrl);
+                    System.IO.File.Delete(filePath);
+                }
+
+                product.ImageUrl = UploadPhoto(model.Image);
+            }
+            productService.Update(product);
+            return RedirectToAction("products");
+        }
+
+        private string UploadPhoto(IFormFile file)
+        {
+            string uniqueFileName = string.Empty;
+
+            if (file != null)
+            {
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "img/product");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                string imageFilePath = Path.Combine(uploadFolder, uniqueFileName);
+                file.CopyTo(new FileStream(imageFilePath, FileMode.Create));
+            }
+
+            return uniqueFileName;
+        }
+
     }
 }

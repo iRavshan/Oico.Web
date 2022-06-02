@@ -8,5 +8,7 @@ namespace Oico.Domain
 {
     public class Order
     {
+        public Guid Id { get; set; }
+        public string Client { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace Oico.Service.Services
         Task<IEnumerable<Product>> GetAll();
         Task<IEnumerable<Product>> LastProducts(int count);
         Task<Product> GetById(Guid Id);
+        Task Delete(Guid Id);
+        void Update(Product product);
     }
 }

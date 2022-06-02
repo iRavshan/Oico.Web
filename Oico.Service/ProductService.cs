@@ -24,6 +24,12 @@ namespace Oico.Service
             await productRepo.SaveComplete();
         }
 
+        public async Task Delete(Guid Id)
+        {
+            await productRepo.Delete(Id);
+            await productRepo.SaveComplete();
+        }
+
         public async Task<IEnumerable<Product>> GetAll()
         {
             return await productRepo.GetAll();
@@ -39,6 +45,12 @@ namespace Oico.Service
             var items = Enumerable.Reverse(await productRepo.GetAll());
 
             return items.Take(count).Select(w => w);
+        }
+
+        public void Update(Product product)
+        {
+            productRepo.Update(product);
+            productRepo.SaveComplete();
         }
     }
 }

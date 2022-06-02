@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Oico.Domain;
 using Oico.Service.Services;
 using Oico.Web.ViewModels.Home;
 using System;
@@ -33,9 +34,27 @@ namespace Oico.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Products()
+        [HttpGet]
+        public async Task<IActionResult> Products()
         {
-            return View();
+            AllProductsViewModel model = new AllProductsViewModel
+            {
+                Products = await productService.GetAll()
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Details(Guid Id)
+        {
+            Product product = await productService.GetById(Id);
+
+            ProductViewModel model = new ProductViewModel
+            {
+                Product = product
+            };
+
+            return View(model);
         }
 
         [HttpGet]

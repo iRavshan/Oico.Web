@@ -53,9 +53,10 @@ namespace Oico.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public Task Update(Product product)
+        public void Update(Product product)
         {
-            throw new NotImplementedException();
+            var eproduct = dbContext.Attach(product);
+            eproduct.State = EntityState.Modified;
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Oico.Web.ViewModels.Home
     {
         public IEnumerable<Product> AllProducts { get; set; }
         public IEnumerable<Product> LastProducts { get; set; }
+        public string SearchText { get; set; }
     }
 }
