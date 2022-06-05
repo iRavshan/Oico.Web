@@ -25,17 +25,22 @@
                         <i class="fa fa-star"></i>
                     </div>
                     <div class="product__details__price">@Model.Product.Price so'm</div>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn">Xarid qilish</a>
                     <ul>
-                        <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                        <li>
+                            <b>Sotuvda</b>
+                            @{
+                                if (Model.Product.NumberOfBoxes != 0)
+
+                                {
+                                    <span>Mavjud</span>
+                                }
+                                else
+                                {
+                                    <span>Mavjud emas</span>
+                                }
+                            }
+                        </li>
+                        <li><b>Har bir qutida</b> <span>@Model.Product.NumberOfBox ta</span></li>
                         <li><b>Massasi</b> <span>@Model.Product.Massa gramm</span></li>
                     </ul>
                 </div>

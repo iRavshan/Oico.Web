@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Oico.Web.ViewModels.Home
 {
-    public class AllProductsViewModel
+    public class CartViewModel : AllProductsViewModel
     {
-        public List<int> CountOfProduct { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public string Username { get; set; }
+        public string Phone { get; set; }
     }
 }

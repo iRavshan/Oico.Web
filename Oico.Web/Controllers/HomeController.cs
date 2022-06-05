@@ -39,9 +39,15 @@ namespace Oico.Web.Controllers
         {
             AllProductsViewModel model = new AllProductsViewModel
             {
+                CountOfProduct = new List<int>(),
                 Products = await productService.GetAll()
             };
-
+            
+            foreach(Product product in model.Products)
+            {
+                model.CountOfProduct.Add(0);
+            }
+            
             return View(model);
         }
 
@@ -57,10 +63,31 @@ namespace Oico.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Cart()
+        [HttpPost]
+        public async Task<IActionResult> Cart(AllProductsViewModel model)
         {
-            return View();
+            CartViewModel newModel = new CartViewModel();
+
+            List<Product> GetProducts = new List<Product>();
+
+            List<int> exCountOfProducts = new List<int>();
+
+            IEnumerable<Product> Products = await productService.GetAll();
+
+            for (int i = 0; i < model.CountOfProduct.Count(); i++)
+            {
+                if(model.CountOfProduct[i] != 0)
+                {
+                    Product product = Products.ToList()[i];
+                    GetProducts.Add(product);
+                    exCountOfProducts.Add(model.CountOfProduct[i]);
+                }
+            }
+
+            newModel.CountOfProduct = exCountOfProducts;
+            newModel.Products = GetProducts;
+
+            return View(newModel);
         }
     }
 }

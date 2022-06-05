@@ -10,5 +10,9 @@ namespace Oico.Domain
     {
         public Guid Id { get; set; }
         public string Client { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime AcceptedTime { get; set; }
+        public DateTime ConfirmedTime { get; set; }
+        public IEnumerable<Thing> Things { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@model AllProductsViewModel
 @{
     ViewData["Title"] = "Barcha muzqaymoqlar";
+   
 }
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/img/breadcumb-hero.jpg">
@@ -20,96 +21,46 @@
 <section class="product spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-5">
-                <div class="sidebar">
-                    <div class="sidebar__item">
-                        <div class="latest-product__text">
+            <form asp-controller="home" asp-action="cart" method="post">
+                <div class="col-lg-9 col-md-7">
+                    <div class="section-title product__discount__title">
+                        <h2>Mahsulotlar</h2>
+                    </div>
+                    <div class="row">
+                        @for (int i = 0; i < Model.Products.Count(); i++)
+                        {
+                            
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="/img/product/@Model.Products.ToArray()[i].ImageUrl">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a asp-controller="home" asp-action="details" asp-route-Id="@Model.Products.ToArray()[i].Id">Batafsil <i class="fas fa-long-arrow-alt-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5 class="mb-3">@Model.Products.ToArray()[i].Name</h5>
+                                        <div class="product__details__quantity">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <input type="number" asp-for="@Model.CountOfProduct[i]" placeholder="Donasi" min="0" max="@Model.Products.ToArray()[i].NumberOfBoxes" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
                             <h4>Xaridlar</h4>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-1.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-2.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-3.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-1.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-2.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="img/latest-product/lp-3.jpg" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <button class="primary-btn">Xarid qilish</button>
+                            <button type="submit" class="btn btn-primary">Yuborish</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9 col-md-7">
-                <div class="section-title product__discount__title">
-                    <h2>Mahsulotlar</h2>
-                </div>
-                <div class="row">
-                    @foreach (var product in Model.Products)
-                    {
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="/img/product/@product.ImageUrl">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a asp-controller="home" asp-action="details" asp-route-Id="@product.Id">@product.Name</a></h6>
-                                    <h5>@product.Price</h5>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>

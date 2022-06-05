@@ -1,3 +1,12 @@
+/******************************************************************
+  Template Name: Ogani
+  Description:  Ogani eCommerce  HTML Template
+  Author: Colorlib
+  Author URI: https://colorlib.com
+  Version: 1.0
+  Created: Colorlib
+******************************************************************/
+
 /*------------------------------------------------------------------
 [Table of contents]
 
@@ -1328,43 +1337,21 @@ ol {
 			margin-right: 0;
 		}
 
-		.product__item__pic__hover li:hover a {
-			background: #4291c8;
-			border-color: #4291c8;
+
+		.product__item__pic__hover li:hover a i {
+			color: #ffffff;
+			transform: rotate(360deg);
 		}
 
-			.product__item__pic__hover li:hover a i {
-				color: #ffffff;
-				transform: rotate(360deg);
-			}
-
-		.product__item__pic__hover li a {
-			font-size: 16px;
-			color: #1c1c1c;
-			height: 40px;
-			width: 40px;
-			line-height: 40px;
-			text-align: center;
-			border: 1px solid #ebebeb;
-			background: #ffffff;
-			display: block;
-			border-radius: 50%;
-			-webkit-transition: all, 0.5s;
-			-moz-transition: all, 0.5s;
-			-ms-transition: all, 0.5s;
-			-o-transition: all, 0.5s;
-			transition: all, 0.5s;
+		.product__item__pic__hover li a i {
+			position: relative;
+			transform: rotate(0);
+			-webkit-transition: all, 0.3s;
+			-moz-transition: all, 0.3s;
+			-ms-transition: all, 0.3s;
+			-o-transition: all, 0.3s;
+			transition: all, 0.3s;
 		}
-
-			.product__item__pic__hover li a i {
-				position: relative;
-				transform: rotate(0);
-				-webkit-transition: all, 0.3s;
-				-moz-transition: all, 0.3s;
-				-ms-transition: all, 0.3s;
-				-o-transition: all, 0.3s;
-				transition: all, 0.3s;
-			}
 
 .product__discount__item__text {
 	text-align: center;
@@ -1570,27 +1557,18 @@ ol {
 			margin-right: 0;
 		}
 
-		.product__item__pic__hover li:hover a {
-			background: #4291c8;
-			border-color: #4291c8;
+		.product__item__pic__hover li:hover a i {
+			color: #03a9f4;
+			transform: rotate(360deg);
 		}
-
-			.product__item__pic__hover li:hover a i {
-				color: #ffffff;
-				transform: rotate(360deg);
-			}
 
 		.product__item__pic__hover li a {
 			font-size: 16px;
-			color: #1c1c1c;
-			height: 40px;
-			width: 40px;
+			color: #03a9f4;
+			font-weight: 600;
 			line-height: 40px;
 			text-align: center;
-			border: 1px solid #ebebeb;
-			background: #ffffff;
 			display: block;
-			border-radius: 50%;
 			-webkit-transition: all, 0.5s;
 			-moz-transition: all, 0.5s;
 			-ms-transition: all, 0.5s;
@@ -1927,7 +1905,6 @@ ol {
 					display: inline-block;
 					margin-right: 25px;
 					border-radius: 4px;
-					width: 120px;
 				}
 
 				.shoping__cart__table table tbody tr td.shoping__cart__item h5 {
@@ -3631,12 +3608,6 @@ ol {
 		border-width: 0px;
 		padding: 10px;
 		border-radius: 5px;
-	}
-
-	.admin-root form button.delete-btn{
-		background-color: transparent;
-		padding: 0px;
-		margin: 0px 10px;
 	}
 
 	.admin-root form input.search-txt {
