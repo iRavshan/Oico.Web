@@ -38,11 +38,12 @@ namespace Oico.Web
             
             //=========== Services ==========//
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IOrderService, OrderService>();
 
 
             //=========== Database Connection ==========//
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DatabaseConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -13,6 +13,8 @@ namespace Oico.Domain
         public string PhoneNumber { get; set; }
         public DateTime AcceptedTime { get; set; }
         public DateTime ConfirmedTime { get; set; }
+        public bool IsComplete { get; set; }
+        public int Sum { get; set; }
         public IEnumerable<Thing> Things { get; set; }
     }
 }

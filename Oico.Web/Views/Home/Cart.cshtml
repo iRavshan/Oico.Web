@@ -37,18 +37,14 @@
                             {
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
+                                        <img src="img/product/@Model.Products.ElementAt(i).ImageUrl" alt="image">
                                         <h5>@Model.Products.ElementAt(i).Name</h5>
                                     </td>
                                     <td class="shoping__cart__price">
                                         @Model.Products.ElementAt(i).Price so'm
                                     </td>
                                     <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="number" asp-for="@Model.CountOfProduct[i]">
-                                            </div>
-                                        </div>
+                                        @Model.CountOfProduct[i]
                                     </td>
                                     <td class="shoping__cart__total">
                                         @(Model.Products.ElementAt(i).Price * Model.CountOfProduct[i]) so'm
@@ -60,22 +56,34 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn cart-btn-right">
-                        <span class="icon_loading"></span>
-                        Yangilash
-                    </a>
+        <form asp-controller="home" asp-action="order" method="post">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a asp-controller="home" asp-action="products" class="primary-btn cart-btn cart-btn-right">
+                            <span class="icon_loading"></span>
+                            Yana xarid
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <form asp-controller="home" asp-action="cart" method="post">
                 <div class="col-lg-6">
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Shaxsiy ma'lumotlar</h5>
-                            <input type="text" placeholder="Ismingiz" class="mb-3 form-control" required asp-for="Username"><br />
+                            <input type="text" placeholder="Ismingiz" class="form-control" required asp-for="Username"><br />
                             <input type="text" placeholder="Telefon raqamingiz" class="form-control" required asp-for="Phone">
+                            @for (int i = 0; i < Model.Products.Count(); i++)
+                            {
+                                <input hidden asp-for="@Model.Products.ElementAt(i).Id" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).Name" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).Price" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).WholesalePrice" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).NumberOfBox" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).NumberOfBoxes" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).Massa" />
+                                <input hidden asp-for="@Model.Products.ElementAt(i).ImageUrl" />
+                                <input hidden asp-for="@Model.CountOfProduct[i]" />
+                            }
                         </div>
                     </div>
                 </div>
@@ -116,11 +124,11 @@
                                 }
                             </li>
                         </ul>
-                        <button type="submit" class="btn btn-primary">Buyurtma berish</button>
+                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-wallet"></i> Buyurtma berish</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </section>
 <!-- Shoping Cart Section End -->

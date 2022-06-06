@@ -15,12 +15,15 @@ namespace Oico.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
+        private readonly IOrderService orderService;
 
         public HomeController(ILogger<HomeController> logger,
-                              IProductService productService)
+                              IProductService productService,
+                              IOrderService orderService)
         {
             _logger = logger;
             this.productService = productService;
+            this.orderService = orderService;
         }
 
         public async Task<IActionResult> Index()
@@ -88,6 +91,23 @@ namespace Oico.Web.Controllers
             newModel.Products = GetProducts;
 
             return View(newModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Order(CartViewModel model)
+        {
+            Order order = new Order 
+            { 
+                Id = Guid.NewGuid(),
+                AcceptedTime = DateTime.Now,
+                Client = model.Username,
+                PhoneNumber = model.Phone,
+                IsComplete = false
+            };
+
+            await orderService.Create(order);
+
+            return RedirectToAction("index");
         }
     }
 }

@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oico.Data.Repositories
+namespace Oico.Service.Services
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
         Task Create(Order order);
-        Task SaveComplete();
         Task<IEnumerable<Order>> GetAll();
         Task<Order> GetById(Guid Id);
-
     }
 }
