@@ -17,7 +17,7 @@ namespace Oico.Web.ViewModels.Admin
         [Display(Name = "Sotuvdagi narxi")]
         public int Price { get; set; }
 
-        [Display(Name = "Kelish tannarxi")]
+        [Display(Name = "Kelish narxi")]
         public int WholesalePrice { get; set; }
 
         [Display(Name = "Donasi")]

@@ -31,11 +31,17 @@ namespace Oico.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateViewModel model)
+        public async Task<IActionResult> Create(CreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                Product exProduct = await productService.GetByName(model.Name);
                 
+                if(exProduct is not null)
+                {
+                    return View();
+                }
+
                 Product product = new Product
                 {
                     Id = Guid.NewGuid(),
@@ -48,7 +54,7 @@ namespace Oico.Web.Controllers
                     Massa = model.Massa
                 };
 
-                productService.Create(product);
+                await productService.Create(product);
 
                 return RedirectToAction("products");
             }

@@ -40,6 +40,12 @@ namespace Oico.Service
             return await productRepo.GetById(Id);
         }
 
+        public async Task<Product> GetByName(string name)
+        {
+            return (await productRepo.GetAll())
+                    .Where(w => w.Name.Equals(name)).First();
+        }
+
         public async Task<IEnumerable<Product>> GetByShortName(string shortname)
         {
             IEnumerable<Product> products = await productRepo.GetAll();

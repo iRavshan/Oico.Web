@@ -3,7 +3,7 @@
     ViewData["Title"] = Model.Product.Name;
 }
 
-<section class="product-details spad">
+<section class="product-details spad" style="margin-top: 100px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -40,8 +40,15 @@
                                 }
                             }
                         </li>
-                        <li><b>Har bir qutida</b> <span>@Model.Product.NumberOfBox ta</span></li>
-                        <li><b>Massasi</b> <span>@Model.Product.Massa gramm</span></li>
+                        <li>
+                            <b>Har bir qutida</b> <span>@Model.Product.NumberOfBox ta</span>
+                        </li>
+                        @if (Model.Product.Massa != 0)
+                        {
+                            <li>
+                                <b>Massasi</b> <span>@Model.Product.Massa</span>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
