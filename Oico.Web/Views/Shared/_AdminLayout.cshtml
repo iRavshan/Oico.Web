@@ -41,9 +41,9 @@
 
     <div class="topnav fixed-top" id="myTopnav">
         <a asp-controller="home" asp-action="index" class="active">MOZ</a>
-        <a asp-controller="admin" asp-action="create" class="nav-item">Yangi mahsulot</a>
         <a asp-controller="admin" asp-action="products" class="nav-item">Mahsulotlar</a>
-        <a asp-controller="admin" asp-action="" class="nav-item">Buyurtmalar</a>
+        <a asp-controller="admin" asp-action="orders" class="nav-item">Buyurtmalar</a>
+        <a asp-controller="admin" asp-action="create" class="nav-item">Yangi mahsulot</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
@@ -72,7 +72,7 @@
                             <li><a asp-controller="admin" asp-action="index">Bosh sahifa</a></li>
                             <li><a asp-controller="admin" asp-action="products">Mahsulotlar</a></li>
                             <li><a asp-controller="admin" asp-action="create">Yangi mahsulot</a></li>
-                            <li><a asp-controller="admin" asp-action="create">Buyurtmalar</a></li>
+                            <li><a asp-controller="admin" asp-action="orders">Buyurtmalar</a></li>
                         </ul>
                     </div>
                 </div>

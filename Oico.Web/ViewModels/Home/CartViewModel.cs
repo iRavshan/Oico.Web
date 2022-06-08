@@ -10,5 +10,7 @@ namespace Oico.Web.ViewModels.Home
     {
         public string Username { get; set; }
         public string Phone { get; set; }
+
+        public List<Guid> GuidsOfProducts { get; set; }
     }
 }

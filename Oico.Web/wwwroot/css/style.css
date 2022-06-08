@@ -108,9 +108,9 @@ ol {
   float: left;
   display: block;
   text-align: center;
-  padding: 17px 16px;
+  padding: 7px 12px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 31px;
   background-color: #4291c8;
   color: white;
   font-weight: 600;
@@ -124,9 +124,11 @@ ol {
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
+  .topnav{padding: 0px;}
   .topnav a.icon {
     float: right;
     display: block;
+	padding: 17px;
   }
 }
 

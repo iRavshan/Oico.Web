@@ -1,4 +1,5 @@
-﻿using Oico.Domain;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using Oico.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace Oico.Data.Repositories
         Task SaveComplete();
         Task<IEnumerable<Order>> GetAll();
         Task<Order> GetById(Guid Id);
-
+        void CompleteOrder(Order order);
     }
 }

@@ -1,0 +1,59 @@
+﻿@model OrderDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Buyurtma";
+}
+
+<section class="product-details spad" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="/img/product/" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>Buyurtma</h3>
+                    <div class="product__details__rating">
+                        <p>@Model.Order.AcceptedTime.ToString("dd.MM.yyyy hh:mm")</p>
+                    </div>
+                    <div class="product__details__price">@Model.Order.Sum so'm</div>
+                    @if (!Model.Order.IsComplete)
+                    {
+                        <form asp-controller="admin" asp-action="SetComplete" asp-route-Id="@Model.Order.Id" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-primary mr-3"><i class="fas fa-vote-yea mr-2"></i>Bajarish</button>
+                        </form>
+                    }
+                    <button class="btn btn-primary"><i class="fas fa-print mr-2"></i> Chekni chop etish</button>
+                    <ul>
+                        <li>
+                            <b>Buyurtma ID</b>
+                            <span>@Model.Order.Id</span>
+                        </li>
+                        <li>
+                            <b>Buyurtmachi</b>
+                            <span>@Model.Order.Client</span>
+                        </li>
+                        <li>
+                            <b>Telefon raqam</b>
+                            <span>@Model.Order.PhoneNumber</span>
+                        </li>
+                        <li>
+                            <b>Buyurtmalar:</b>
+                            <ul>
+                                @foreach (var item in Model.Order.Things)
+                                {
+                                    <li>@item.NameOfProduct <span>@item.CountOfProduct ta</span></li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

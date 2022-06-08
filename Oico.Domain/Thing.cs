@@ -9,7 +9,7 @@ namespace Oico.Domain
     public class Thing
     {
         public Guid Id { get; set; }
-        public Product Product { get; set; }
+        public string NameOfProduct { get; set; }
         public int CountOfProduct { get; set; }
     }
 }

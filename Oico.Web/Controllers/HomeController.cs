@@ -73,6 +73,8 @@ namespace Oico.Web.Controllers
 
             List<Product> GetProducts = new List<Product>();
 
+            List<Guid> Ids = new List<Guid>();
+
             List<int> exCountOfProducts = new List<int>();
 
             IEnumerable<Product> Products = await productService.GetAll();
@@ -83,12 +85,14 @@ namespace Oico.Web.Controllers
                 {
                     Product product = Products.ToList()[i];
                     GetProducts.Add(product);
+                    Ids.Add(product.Id);
                     exCountOfProducts.Add(model.CountOfProduct[i]);
                 }
             }
 
             newModel.CountOfProduct = exCountOfProducts;
             newModel.Products = GetProducts;
+            newModel.GuidsOfProducts = Ids;
 
             return View(newModel);
         }
@@ -102,8 +106,25 @@ namespace Oico.Web.Controllers
                 AcceptedTime = DateTime.Now,
                 Client = model.Username,
                 PhoneNumber = model.Phone,
-                IsComplete = false
+                IsComplete = false,
+                Things = new List<Thing>()
             };
+
+            List<Thing> things = new List<Thing>();
+
+            int summa = 0;
+
+            for (int i = 0; i < model.CountOfProduct.Count(); i++)
+            {
+                Product product = await productService.GetById(model.GuidsOfProducts[i]);
+
+                summa += model.CountOfProduct[i] * product.Price;
+
+                things.Add(new Thing { Id = Guid.NewGuid(), CountOfProduct = model.CountOfProduct[i], NameOfProduct = product.Name});
+            }
+
+            order.Sum = summa;
+            order.Things = things;
 
             await orderService.Create(order);
 

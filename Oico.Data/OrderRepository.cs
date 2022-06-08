@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Oico.Data.Repositories;
 using Oico.Domain;
 using System;
@@ -18,6 +19,12 @@ namespace Oico.Data
             this.dbContext = dbContext;
         }
 
+        public void CompleteOrder(Order order)
+        {
+            var eOrder = dbContext.Attach(order);
+            eOrder.State = EntityState.Modified;
+        }
+
         public async Task Create(Order order)
         {
             await dbContext.Orders.AddAsync(order);
@@ -30,7 +37,8 @@ namespace Oico.Data
 
         public async Task<Order> GetById(Guid Id)
         {
-            return await dbContext.Orders.FindAsync(Id);
+            Order order = await dbContext.Orders.Include(p => p.Things).Where(w => w.Id.Equals(Id)).FirstOrDefaultAsync();
+            return order;
         }
 
         public async Task SaveComplete()

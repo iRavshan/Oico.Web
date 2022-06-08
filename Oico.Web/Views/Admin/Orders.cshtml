@@ -1,0 +1,105 @@
+﻿@model OrdersViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Buyurtmalar";
+}
+
+<div class="container" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="admin-root">
+                <h3>Yangi buyurtmalar</h3>
+                @if (Model.NewOrders.Count() != 0)
+                {
+                    <div class="shoping__cart__table mt-4">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Buyurtmachi</th>
+                                    <th>Telefon raqam</th>
+                                    <th>Buyurtma vaqti</th>
+                                    <th>To'lov summasi</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.NewOrders)
+                                {
+                                    <tr>
+                                        <td class="shoping__cart__price">
+                                            <h5>@item.Client</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            @item.PhoneNumber
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            @item.Sum
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                @if (Model.NewOrders.Count() == 0)
+                {
+                    <p class="text-center mt-3">Hozircha yangi buyurtmalar yo'q</p>
+                }
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="admin-root mt-5">
+                <h3>Barcha bajarilgan buyurtmalar</h3>
+                @if (Model.CompletedOrders.Count() != 0)
+                {
+                    <div class="shoping__cart__table mt-4">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Buyurtmachi</th>
+                                    <th>Telefon raqam</th>
+                                    <th>Buyurtma vaqti</th>
+                                    <th>To'lov summasi</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CompletedOrders)
+                                {
+                                    <tr>
+                                        <td class="shoping__cart__price">
+                                            <h5>@item.Client</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            @item.PhoneNumber
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            @item.Sum
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                @if (Model.CompletedOrders.Count() == 0)
+                {
+                    <p class="text-center mt-3">Hozircha bajarilgan buyurtmalar yo'q</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

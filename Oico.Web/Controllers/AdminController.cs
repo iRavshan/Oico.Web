@@ -21,12 +21,15 @@ namespace Oico.Web.Controllers
         }
 
         private readonly IProductService productService;
+        private readonly IOrderService orderService;
         private readonly IWebHostEnvironment webHost;
 
         public AdminController(IProductService productService,
+                               IOrderService orderService,
                                IWebHostEnvironment webHost)
         {
             this.productService = productService;
+            this.orderService = orderService;
             this.webHost = webHost;
         }
 
@@ -35,9 +38,9 @@ namespace Oico.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product exProduct = await productService.GetByName(model.Name);
-                
-                if(exProduct is not null)
+                var exProduct = await productService.GetByName(model.Name);
+
+                if (exProduct is not null)
                 {
                     return View();
                 }
@@ -151,6 +154,36 @@ namespace Oico.Web.Controllers
             }
             productService.Update(product);
             return RedirectToAction("products");
+        }
+
+        public async Task<IActionResult> Orders()
+        {
+            OrdersViewModel model = new OrdersViewModel
+            {
+               NewOrders = await orderService.GetNewOrders(),
+               CompletedOrders = await orderService.GetCompletedOrders()
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Order(Guid Id)
+        {
+            OrderDetailsViewModel model = new OrderDetailsViewModel
+            {
+                Order = await orderService.GetById(Id)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SetComplete(Guid Id)
+        {
+            Order order = await orderService.GetById(Id);
+            order.IsComplete = true;
+            orderService.CompleteOrder(order);
+            return RedirectToAction("orders");
         }
 
         private string UploadPhoto(IFormFile file)

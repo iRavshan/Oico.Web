@@ -12,5 +12,8 @@ namespace Oico.Service.Services
         Task Create(Order order);
         Task<IEnumerable<Order>> GetAll();
         Task<Order> GetById(Guid Id);
+        Task<IEnumerable<Order>> GetCompletedOrders();
+        Task<IEnumerable<Order>> GetNewOrders();
+        void CompleteOrder(Order order);
     }
 }

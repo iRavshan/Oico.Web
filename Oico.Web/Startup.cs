@@ -43,7 +43,7 @@ namespace Oico.Web
 
             //=========== Database Connection ==========//
             services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DatabaseConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
