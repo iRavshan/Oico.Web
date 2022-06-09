@@ -9,6 +9,7 @@ using Oico.Data;
 using Oico.Data.Repositories;
 using Oico.Service;
 using Oico.Service.Services;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

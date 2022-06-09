@@ -15,5 +15,10 @@ namespace Oico.Service.Services
         Task<IEnumerable<Order>> GetCompletedOrders();
         Task<IEnumerable<Order>> GetNewOrders();
         void CompleteOrder(Order order);
+        Task<IEnumerable<Order>> OrdersOnLastWeek();
+        Task<IEnumerable<Order>> OrdersOnLastYear();
+        Task<IEnumerable<Order>> OrdersOnLastMonth();
+        Task<IEnumerable<Order>> OrdersOnToday();
+
     }
 }

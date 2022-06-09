@@ -51,5 +51,59 @@ namespace Oico.Service
             return (await orderRepo.GetAll()).Where(w => w.IsComplete == false).Select(p => p).ToList();
 
         }
+
+        public async Task<IEnumerable<Order>> OrdersOnLastMonth()
+        {
+            IEnumerable<Order> orders = (await orderRepo.GetAll())
+                                    .Where(w => w.IsComplete == true)
+                                    .OrderByDescending(p => p.ConfirmedTime);
+
+            IEnumerable<Order> ordersOnLastMonth = orders.Where(w => 
+                                    w.ConfirmedTime.Month.Equals(DateTime.Now.Month) && 
+                                    w.ConfirmedTime.Year.Equals(DateTime.Now.Year));
+
+            return ordersOnLastMonth;
+        }
+
+        public async Task<IEnumerable<Order>> OrdersOnLastWeek()
+        {
+            IEnumerable<Order> orders = (await orderRepo.GetAll())
+                                     .Where(w => w.IsComplete == true)
+                                     .OrderByDescending(p => p.ConfirmedTime);
+
+            IEnumerable<Order> ordersOnLastMonth = orders.Where(w =>
+                                    w.ConfirmedTime.Month.Equals(DateTime.Now.Month) &&
+                                    w.ConfirmedTime.Year.Equals(DateTime.Now.Year));
+
+            IEnumerable<Order> ordersOnLastWeek = ordersOnLastMonth.TakeLast(7).ToList();
+
+            return ordersOnLastWeek;
+        }
+
+        public async Task<IEnumerable<Order>> OrdersOnLastYear()
+        {
+            IEnumerable<Order> orders = (await orderRepo.GetAll())
+                                    .Where(w => w.IsComplete == true)
+                                    .OrderByDescending(p => p.ConfirmedTime);
+
+            IEnumerable<Order> ordersOnLastYear = orders.Where(w =>
+                                    w.ConfirmedTime.Year.Equals(DateTime.Now.Year));
+
+            return ordersOnLastYear;
+        }
+
+        public async Task<IEnumerable<Order>> OrdersOnToday()
+        {
+            IEnumerable<Order> orders = (await orderRepo.GetAll())
+                                    .Where(w => w.IsComplete == true)
+                                    .OrderByDescending(p => p.ConfirmedTime);
+
+            IEnumerable<Order> ordersOnToday = orders.Where(w =>
+                                    w.ConfirmedTime.Date.Equals(DateTime.Now.Date) &&
+                                    w.ConfirmedTime.Month.Equals(DateTime.Now.Month) &&
+                                    w.ConfirmedTime.Year.Equals(DateTime.Now.Year));
+
+            return ordersOnToday;
+        }
     }
 }

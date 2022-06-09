@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form asp-controller="home" asp-action="search" method="post">
+                        <form asp-controller="home" asp-action="index" method="post">
                             <div class="hero__search__categories">
                                 <i class="fas fa-search"></i>
                             </div>
@@ -28,30 +28,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-                    <div class="hero__text">
-                        <span>Muzqaymoqlar</span>
-                        <h2>Faqat <br />eng yaxshilari</h2>
-                        <p>Yangi ta'mlarni kashf etish vaqti yetdi.</p>
-                        <a asp-controller="home" asp-action="products" class="primary-btn"><i class="fas fa-shopping-cart"></i> Buyurtma berish</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Hero Section End -->
-
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                @foreach (var item in Model.AllProducts)
+                @if (Model.SearchText is null)
                 {
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/@item.ImageUrl">
-                            <h5><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h5>
+                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                        <div class="hero__text">
+                            <span>Muzqaymoqlar</span>
+                            <h2>Faqat <br />eng yaxshilari</h2>
+                            <p>Yangi ta'mlarni kashf etish vaqti yetdi.</p>
+                            <a asp-controller="home" asp-action="products" class="primary-btn"><i class="fas fa-shopping-cart"></i> Buyurtma berish</a>
                         </div>
                     </div>
                 }
@@ -59,60 +43,133 @@
         </div>
     </div>
 </section>
-<!-- Categories Section End -->
+<!-- Hero Section End -->
 
-<!-- Featured Section Begin -->
-<section class="featured spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Eng yangi mahsulotlar</h2>
+@if (Model.SearchText is null)
+{
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    @foreach (var item in Model.AllProducts)
+                    {
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="img/product/@item.ImageUrl">
+                                <h5><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h5>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-        <div class="row featured__filter">
-            @foreach (var item in Model.LastProducts)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/img/product/@item.ImageUrl">
-                            <ul class="featured__item__pic__hover">
-                                <li><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id"><i class="fas fa-info-circle"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h6>
-                            @{
-                                string s = string.Empty;
-
-                                string rad = string.Empty;
-
-                                while (true)
-                                {
-                                    if (item.Price.ToString().Length <= 3)
-                                    {
-                                        s = item.Price.ToString() + " " + s;
-                                        break;
-                                    }
-
-                                    rad = item.Price % 1000 == 0 ? "000" : (item.Price % 1000).ToString();
-
-                                    s = s.Insert(0, rad);
-
-                                    item.Price = item.Price / 1000;
-                                }
-
-                                <h5>@s so'm</h5>
-                            }
-                        </div>
+    </section>
+    <!-- Categories Section End -->
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Eng yangi mahsulotlar</h2>
                     </div>
                 </div>
-            }
+            </div>
+            <div class="row featured__filter">
+                @foreach (var item in Model.LastProducts)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="/img/product/@item.ImageUrl">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id"><i class="fas fa-info-circle"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h6>
+                                @{
+                                    string s = string.Empty;
+
+                                    string rad = string.Empty;
+
+                                    while (true)
+                                    {
+                                        if (item.Price.ToString().Length <= 3)
+                                        {
+                                            s = item.Price.ToString() + " " + s;
+                                            break;
+                                        }
+
+                                        rad = item.Price % 1000 == 0 ? "000" : (item.Price % 1000).ToString();
+
+                                        s = s.Insert(0, rad);
+
+                                        item.Price = item.Price / 1000;
+                                    }
+
+                                    <h5>@s so'm</h5>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-</section>
-<!-- Featured Section End -->
+    </section>
+    <!-- Featured Section End -->
+}
+
+@if (Model.SearchText is not null)
+{
+    <section class="featured spad">
+        <div class="container">
+            <div class="row featured__filter">
+                @foreach (var item in Model.AllProducts)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="/img/product/@item.ImageUrl">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id"><i class="fas fa-info-circle"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a asp-controller="home" asp-action="details" asp-route-Id="@item.Id">@item.Name</a></h6>
+                                @{
+                                    string s = string.Empty;
+
+                                    string rad = string.Empty;
+
+                                    while (true)
+                                    {
+                                        if (item.Price.ToString().Length <= 3)
+                                        {
+                                            s = item.Price.ToString() + " " + s;
+                                            break;
+                                        }
+
+                                        rad = item.Price % 1000 == 0 ? "000" : (item.Price % 1000).ToString();
+
+                                        s = s.Insert(0, rad);
+
+                                        item.Price = item.Price / 1000;
+                                    }
+
+                                    <h5>@s so'm</h5>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if(Model.AllProducts.Count() == 0)
+{
+  <p class="text-center mt-3 mb-3">"@Model.SearchText" qidiruvi bo'yicha hech narsa topilmadi :(</p>
+}
 
 <!-- Banner Begin -->
 <div class="banner">

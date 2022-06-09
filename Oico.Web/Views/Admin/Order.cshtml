@@ -11,7 +11,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="/img/product/" alt="">
+                             src="/img/hero/forOrderPage-removebg-preview.png" alt="">
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="product__details__text">
                     <h3>Buyurtma</h3>
                     <div class="product__details__rating">
-                        <p>@Model.Order.AcceptedTime.ToString("dd.MM.yyyy hh:mm")</p>
+                        <p>@Model.Order.AcceptedTime.ToString("dd.MM.yyyy HH:mm")</p>
                     </div>
                     <div class="product__details__price">@Model.Order.Sum so'm</div>
                     @if (!Model.Order.IsComplete)
@@ -28,7 +28,7 @@
                             <button type="submit" class="btn btn-primary mr-3"><i class="fas fa-vote-yea mr-2"></i>Bajarish</button>
                         </form>
                     }
-                    <button class="btn btn-primary"><i class="fas fa-print mr-2"></i> Chekni chop etish</button>
+                    <a class="btn btn-primary" asp-controller="admin" asp-action="PrintOrder" asp-route-Id="@Model.Order.Id"><i class="fas fa-print mr-2"></i> Chekni chop etish</a>
                     <ul>
                         <li>
                             <b>Buyurtma ID</b>
@@ -42,6 +42,12 @@
                             <b>Telefon raqam</b>
                             <span>@Model.Order.PhoneNumber</span>
                         </li>
+                        @if (Model.Order.IsComplete) 
+                        { <li>
+                            <b>Bajarilgan vaqti</b>
+                            <span>@Model.Order.ConfirmedTime.ToString("dd.MM.yyyy HH:mm")</span>
+                          </li>
+                        }
                         <li>
                             <b>Buyurtmalar:</b>
                             <ul>

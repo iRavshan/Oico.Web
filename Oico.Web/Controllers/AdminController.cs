@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Oico.Domain;
 using Oico.Service.Services;
 using Oico.Web.ViewModels.Admin;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -160,8 +162,11 @@ namespace Oico.Web.Controllers
         {
             OrdersViewModel model = new OrdersViewModel
             {
-               NewOrders = await orderService.GetNewOrders(),
-               CompletedOrders = await orderService.GetCompletedOrders()
+                NewOrders = await orderService.GetNewOrders(),
+                OrdersOnYear = await orderService.OrdersOnLastYear(),
+                OrdersOnMonth = await orderService.OrdersOnLastMonth(),
+                OrdersOnToday = await orderService.OrdersOnToday(),
+                OrdersOnWeek = await orderService.OrdersOnLastWeek()
             };
 
             return View(model);
@@ -182,6 +187,7 @@ namespace Oico.Web.Controllers
         {
             Order order = await orderService.GetById(Id);
             order.IsComplete = true;
+            order.ConfirmedTime = DateTime.Now;
             orderService.CompleteOrder(order);
             return RedirectToAction("orders");
         }
@@ -200,6 +206,5 @@ namespace Oico.Web.Controllers
 
             return uniqueFileName;
         }
-
     }
 }

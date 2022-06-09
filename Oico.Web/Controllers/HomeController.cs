@@ -26,6 +26,7 @@ namespace Oico.Web.Controllers
             this.orderService = orderService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             IndexViewModel model = new IndexViewModel
@@ -35,6 +36,26 @@ namespace Oico.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(IndexViewModel model)
+        {
+            IndexViewModel newModel = new IndexViewModel();
+
+            if (model.SearchText is null)
+            {
+                newModel.AllProducts = await productService.GetAll();
+                newModel.LastProducts = await productService.LastProducts(8);
+            }
+
+            else
+            {
+                newModel.AllProducts = await productService.GetByShortName(model.SearchText);
+                newModel.SearchText = model.SearchText;
+            }
+
+            return View(newModel);
         }
 
         [HttpGet]
