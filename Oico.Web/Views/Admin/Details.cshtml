@@ -22,14 +22,17 @@
                     <label asp-for="Price"></label>
                     <input type="number" asp-for="Price" required>
 
-                    <label asp-for="NumberOfBoxes"></label>
-                    <input type="number" asp-for="NumberOfBoxes" required>
+                    <label asp-for="CountOfProduct"></label>
+                    <input type="number" asp-for="CountOfProduct" disabled>
 
                     <label asp-for="NumberOfBox"></label>
                     <input type="number" asp-for="NumberOfBox" required>
 
                     <label asp-for="Massa"></label>
                     <input type="number" asp-for="Massa">
+
+                    <label asp-for="CountOfNewBoxes"></label>
+                    <input type="number" asp-for="CountOfNewBoxes" value="0">
 
                     <label asp-for="Image"></label>
                     <input type="file" accept="image/*" asp-for="Image">

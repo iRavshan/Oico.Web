@@ -13,7 +13,7 @@ namespace Oico.Domain
         public int Price { get; set; }
         public int WholesalePrice { get; set; }
         public int NumberOfBox { get; set; }
-        public int NumberOfBoxes { get; set; }
+        public int CountOfProduct { get; set; }
         public string ImageUrl { get; set; }
         public int Massa { get; set; }
     }

@@ -6,6 +6,7 @@ using Oico.Web.ViewModels.Home;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -149,7 +150,15 @@ namespace Oico.Web.Controllers
 
             await orderService.Create(order);
 
-            return RedirectToAction("index");
+            return View("successfully");
+        }
+        
+        [HttpPost]
+        public IActionResult Successfully(Guid Id)
+        {
+            PointF a = new PointF(20f, 40f);
+
+            return View();
         }
     }
 }

@@ -19,6 +19,5 @@ namespace Oico.Service.Services
         Task<IEnumerable<Order>> OrdersOnLastYear();
         Task<IEnumerable<Order>> OrdersOnLastMonth();
         Task<IEnumerable<Order>> OrdersOnToday();
-
     }
 }

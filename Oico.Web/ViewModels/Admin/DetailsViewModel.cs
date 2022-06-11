@@ -11,5 +11,11 @@ namespace Oico.Web.ViewModels.Admin
     public class DetailsViewModel : CreateViewModel
     {
         public string ExistingImageUrl { get; set; }
+
+        [Display(Name = "Yangi qutilar soni")]
+        public int CountOfNewBoxes { get; set; }
+
+        [Display(Name = "Mahsulot soni")]
+        public int CountOfProduct { get; set; }
     }
 }

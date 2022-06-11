@@ -29,7 +29,7 @@
                         <li>
                             <b>Sotuvda</b>
                             @{
-                                if (Model.Product.NumberOfBoxes != 0)
+                                if (Model.Product.CountOfProduct != 0)
 
                                 {
                                     <span>Mavjud</span>
@@ -46,7 +46,7 @@
                         @if (Model.Product.Massa != 0)
                         {
                             <li>
-                                <b>Massasi</b> <span>@Model.Product.Massa</span>
+                                <b>Massasi</b> <span>@Model.Product.Massa gramm</span>
                             </li>
                         }
                     </ul>

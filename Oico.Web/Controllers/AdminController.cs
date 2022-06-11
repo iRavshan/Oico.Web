@@ -54,7 +54,7 @@ namespace Oico.Web.Controllers
                     WholesalePrice = model.WholesalePrice,
                     Name = model.Name,
                     NumberOfBox = model.NumberOfBox,
-                    NumberOfBoxes = model.NumberOfBoxes,
+                    CountOfProduct = model.NumberOfBox * model.NumberOfBoxes,
                     ImageUrl = UploadPhoto(model.Image),
                     Massa = model.Massa
                 };
@@ -125,7 +125,7 @@ namespace Oico.Web.Controllers
                 Price = product.Price,
                 WholesalePrice = product.WholesalePrice,
                 NumberOfBox = product.NumberOfBox,
-                NumberOfBoxes = product.NumberOfBoxes,
+                CountOfProduct = product.CountOfProduct,
                 Massa = product.Massa,
                 ExistingImageUrl = product.ImageUrl
             };
@@ -142,7 +142,7 @@ namespace Oico.Web.Controllers
             product.WholesalePrice = model.WholesalePrice;
             product.Price = model.Price;
             product.NumberOfBox = model.NumberOfBox;
-            product.NumberOfBoxes = model.NumberOfBoxes;
+            product.CountOfProduct += (model.CountOfNewBoxes * model.NumberOfBox);
             product.Massa = model.Massa;
             if(model.Image != null) 
             {
@@ -188,8 +188,23 @@ namespace Oico.Web.Controllers
             Order order = await orderService.GetById(Id);
             order.IsComplete = true;
             order.ConfirmedTime = DateTime.Now;
+
+            foreach (var item in order.Things)
+            {
+                Product product = await productService.GetByName(item.NameOfProduct);
+
+                product.CountOfProduct -= item.CountOfProduct;
+
+                productService.Update(product);
+            }
+
             orderService.CompleteOrder(order);
             return RedirectToAction("orders");
+        }
+
+        public async Task<IActionResult> PrintOrder(Guid Id)
+        {
+            return View();
         }
 
         private string UploadPhoto(IFormFile file)

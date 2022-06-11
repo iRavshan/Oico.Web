@@ -56,48 +56,202 @@
         <div class="col-lg-12">
             <div class="admin-root mt-5">
                 <h3>Barcha bajarilgan buyurtmalar</h3>
-                @if (Model.OrdersOnToday.Count() != 0)
-                {
-                    <div class="shoping__cart__table mt-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Buyurtmachi</th>
-                                    <th>Telefon raqam</th>
-                                    <th>Buyurtma vaqti</th>
-                                    <th>To'lov summasi</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.OrdersOnToday)
-                                {
-                                    <tr>
-                                        <td class="shoping__cart__price">
-                                            <h5>@item.Client</h5>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            @item.PhoneNumber
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            @item.Sum
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                           aria-selected="true">Bugunlik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                           aria-selected="false">Haftalik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                           aria-selected="false">Oylik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="year"
+                           aria-selected="false">Yillik</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        @if (Model.OrdersOnToday.Count() != 0)
+                        {
+                            <div class="shoping__cart__table mt-4">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Buyurtmachi</th>
+                                            <th>Telefon raqam</th>
+                                            <th>Buyurtma vaqti</th>
+                                            <th>To'lov summasi</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrdersOnToday)
+                                        {
+                                            <tr>
+                                                <td class="shoping__cart__price">
+                                                    <h5>@item.Client</h5>
+                                                </td>
+                                                <td class="shoping__cart__price">
+                                                    @item.PhoneNumber
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    @item.Sum
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (Model.OrdersOnToday.Count() == 0)
+                        {
+                            <p class="text-center mt-3">Hozircha bugun bajarilgan buyurtmalar yo'q</p>
+                        }
                     </div>
-                }
-                @if (Model.OrdersOnToday.Count() == 0)
-                {
-                    <p class="text-center mt-3">Hozircha bugun bajarilgan buyurtmalar yo'q</p>
-                }
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        @if (Model.OrdersOnWeek.Count() != 0)
+                        {
+                            <div class="shoping__cart__table mt-4">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Buyurtmachi</th>
+                                            <th>Telefon raqam</th>
+                                            <th>Buyurtma vaqti</th>
+                                            <th>To'lov summasi</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrdersOnWeek)
+                                        {
+                                            <tr>
+                                                <td class="shoping__cart__price">
+                                                    <h5>@item.Client</h5>
+                                                </td>
+                                                <td class="shoping__cart__price">
+                                                    @item.PhoneNumber
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    @item.Sum
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (Model.OrdersOnWeek.Count() == 0)
+                        {
+                            <p class="text-center mt-3">Hozircha haftalik bajarilgan buyurtmalar yo'q</p>
+                        }
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        @if (Model.OrdersOnMonth.Count() != 0)
+                        {
+                            <div class="shoping__cart__table mt-4">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Buyurtmachi</th>
+                                            <th>Telefon raqam</th>
+                                            <th>Buyurtma vaqti</th>
+                                            <th>To'lov summasi</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrdersOnMonth)
+                                        {
+                                            <tr>
+                                                <td class="shoping__cart__price">
+                                                    <h5>@item.Client</h5>
+                                                </td>
+                                                <td class="shoping__cart__price">
+                                                    @item.PhoneNumber
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    @item.Sum
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (Model.OrdersOnMonth.Count() == 0)
+                        {
+                            <p class="text-center mt-3">Hozircha haftalik bajarilgan buyurtmalar yo'q</p>
+                        }
+                    </div>
+                    <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+                        @if (Model.OrdersOnYear.Count() != 0)
+                        {
+                            <div class="shoping__cart__table mt-4">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Buyurtmachi</th>
+                                            <th>Telefon raqam</th>
+                                            <th>Buyurtma vaqti</th>
+                                            <th>To'lov summasi</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrdersOnYear)
+                                        {
+                                            <tr>
+                                                <td class="shoping__cart__price">
+                                                    <h5>@item.Client</h5>
+                                                </td>
+                                                <td class="shoping__cart__price">
+                                                    @item.PhoneNumber
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    @item.AcceptedTime.ToString("dd.MM.yyyy hh:mm")
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    @item.Sum
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    <a asp-controller="admin" asp-action="order" asp-route-Id="@item.Id" class="btn btn-outline-primary">Batafsil</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (Model.OrdersOnYear.Count() == 0)
+                        {
+                            <p class="text-center mt-3">Hozircha yillik bajarilgan buyurtmalar yo'q</p>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>

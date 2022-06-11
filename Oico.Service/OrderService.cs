@@ -43,12 +43,13 @@ namespace Oico.Service
 
         public async Task<IEnumerable<Order>> GetCompletedOrders()
         {
-            return (await orderRepo.GetAll()).Where(w => w.IsComplete == true).Select(p => p).ToList();
+            return (await orderRepo.GetAll()).Where(w => w.IsComplete == true).ToList();
         }
 
         public async Task<IEnumerable<Order>> GetNewOrders()
         {
-            return (await orderRepo.GetAll()).Where(w => w.IsComplete == false).Select(p => p).ToList();
+            return (await orderRepo.GetAll()).Where(w => w.IsComplete == false)
+                                             .OrderByDescending(p => p.AcceptedTime);
 
         }
 
